@@ -1,11 +1,14 @@
 import React from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { GENERATE_DATA } from '../../constants';
 import s from './qrCodeGenerator.module.css';
 
 export const QrCodeGenerator = () => {
   const [value, setValue] = React.useState('');
   const [result, setResult] = React.useState('');
-  function onChange() {
+  function generateQRCode() {
+    const prevData = JSON.parse(localStorage.getItem(GENERATE_DATA) || '[]');
+    localStorage.setItem(GENERATE_DATA, JSON.stringify([...prevData, value]));
     setValue('');
     setResult(value);
   }
@@ -22,7 +25,7 @@ export const QrCodeGenerator = () => {
         className={s.input}
         placeholder="Enter your text..."
       />
-      <button type="button" onClick={onChange} className={s.button}>
+      <button type="button" onClick={generateQRCode} className={s.button}>
         Generate
       </button>
       <div>
