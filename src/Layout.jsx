@@ -1,12 +1,17 @@
 import React from 'react';
-import { QrCodeGenerator } from './QrCodeGenerator';
-import { QrCodeScanner } from './QrCodeScanner';
+import { Navigation } from './components/Navigation/Navigation';
+import { QrCodeGenerator } from './components/Generate/QrCodeGenerator';
+import { QrCodeScanner } from './components/Scan/QrCodeScanner';
+import { Routes, Route } from 'react-router-dom';
 
 export const Layout = () => {
   return (
     <div>
-      {/* <QrCodeGenerator /> */}
-      <QrCodeScanner />
+      <Navigation />
+      <Routes>
+        <Route path="/generate" element={<QrCodeGenerator />} />
+        <Route path="/scan" element={<QrCodeScanner />} />
+      </Routes>
     </div>
   );
 };
